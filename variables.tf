@@ -4,12 +4,12 @@ variable "project_id" {
 
 variable "region" {
   description = "The region to host the cluster in"
-  default     = "us-south1"
+  default     = "us-central1"
 }
 
 variable "zone" {
   description = "The zone to host the cluster in (required if is a zonal cluster)"
-  default     = "us-south1-a"
+  default     = "us-central1-a"
 }
 
 variable "network_name" {
@@ -44,6 +44,16 @@ variable "node_pools" {
       auto_upgrade       = true
       disk_size_gb       = 10
       disk_type          = "pd-standard"
+      tags = [
+        "ingress"
+      ]
+      taints = [
+        {
+          key    = "ingress"
+          value  = true
+          effect = "NO_EXECUTE"
+        }
+      ]
     }
     shared = {
       machine_type       = "e2-small"
@@ -55,38 +65,10 @@ variable "node_pools" {
       auto_upgrade       = true
       disk_size_gb       = 20
       disk_type          = "pd-standard"
+      taints             = []
+      tags = [
+        "shared"
+      ]
     }
   }
-}
-
-variable "node_pools_tags" {
-  default = {
-    ingress = [
-      "ingress"
-    ]
-    shared = [
-      "shared"
-    ]
-  }
-}
-
-variable "node_pools_taints" {
-  default = {
-    ingress = [
-      {
-        key    = "ingress"
-        value  = true
-        effect = "NO_EXECUTE"
-      }
-    ]
-    shared = []
-  }
-}
-
-variable "org_id" {
-  type = string
-}
-
-variable "billing_account_id" {
-  type = string
 }

@@ -27,5 +27,5 @@ resource "google_compute_firewall" "default" {
   }
 
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = var.node_pools_tags.ingress
+  target_tags   = var.node_pools.ingress.tags
 }

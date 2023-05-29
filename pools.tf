@@ -37,11 +37,11 @@ resource "google_container_node_pool" "node-pools" {
       mode = "GKE_METADATA"
     }
 
-    tags = var.node_pools_tags[each.key]
+    tags = each.value.tags
 
     dynamic "taint" {
       for_each = {
-        for obj in var.node_pools_taints[each.key] : "${obj.key}_${obj.value}_${obj.effect}" => obj
+        for obj in each.value.taints : "${obj.key}_${obj.value}_${obj.effect}" => obj
       }
       content {
         effect = taint.value.effect
