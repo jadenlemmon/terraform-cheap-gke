@@ -19,6 +19,14 @@ module "cheap-gke" {
 }
 ```
 
+## Release Process
+
+Push a new tag and then draft a new Github Release.
+
+```sh
+git tag v0.1.0 && git push --tags
+```
+
 <!-- BEGIN_TF_DOCS -->
 
 ## Requirements
