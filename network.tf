@@ -6,7 +6,7 @@ resource "google_compute_network" "default" {
 }
 
 resource "google_compute_address" "static-ingress" {
-  name     = "static-ingress"
+  name     = "static-ingress-${local.unique_id}"
   project  = var.project_id
   region   = var.region
   provider = google-beta
@@ -17,7 +17,7 @@ resource "google_compute_address" "static-ingress" {
 }
 
 resource "google_compute_firewall" "default" {
-  name    = "public-ingress"
+  name    = "public-ingress-${local.unique_id}"
   network = google_compute_network.default.self_link
   project = var.project_id
 
