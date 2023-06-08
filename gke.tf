@@ -9,7 +9,7 @@ resource "google_compute_subnetwork" "default" {
   project       = google_compute_network.default.project
   region        = var.region
   network       = google_compute_network.default.name
-  ip_cidr_range = "10.0.0.0/24"
+  ip_cidr_range = var.cluster_subnetwork_cidr_range
 }
 
 resource "google_container_cluster" "default" {
@@ -31,12 +31,12 @@ resource "google_container_cluster" "default" {
   private_cluster_config {
     enable_private_nodes    = true
     enable_private_endpoint = false
-    master_ipv4_cidr_block  = "10.1.0.0/28"
+    master_ipv4_cidr_block  = var.master_ipv4_cidr_block
   }
 
   ip_allocation_policy {
-    cluster_ipv4_cidr_block  = "10.2.0.0/18"
-    services_ipv4_cidr_block = "10.3.0.0/18"
+    cluster_ipv4_cidr_block  = var.cluster_ipv4_cidr_block
+    services_ipv4_cidr_block = var.services_ipv4_cidr_block
   }
 
   default_snat_status {

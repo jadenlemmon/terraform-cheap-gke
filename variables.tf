@@ -72,3 +72,23 @@ variable "node_pools" {
     }
   }
 }
+
+variable "cluster_subnetwork_cidr_range" {
+  description = "The CIDR range for the cluster subnetwork"
+  default     = "10.0.0.0/24"
+}
+
+variable "master_ipv4_cidr_block" {
+  description = "The CIDR range for the master nodes"
+  default     = "10.1.0.0/28"
+}
+
+variable "cluster_ipv4_cidr_block" {
+  description = "The CIDR range for the cluster pods"
+  default     = "10.2.0.0/18"
+}
+
+variable "services_ipv4_cidr_block" {
+  description = "The CIDR range for the cluster services"
+  default     = "10.3.0.0/18"
+}
