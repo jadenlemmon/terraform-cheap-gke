@@ -35,7 +35,6 @@ variable "disk_size" {
 variable "node_pools" {
   default = {
     ingress = {
-      machine_type       = "e2-small"
       initial_node_count = 1
       min_node_count     = 1
       max_node_count     = 1
@@ -56,7 +55,6 @@ variable "node_pools" {
       ]
     }
     shared = {
-      machine_type       = "e2-small"
       initial_node_count = 1
       min_node_count     = 1
       max_node_count     = 5
@@ -71,6 +69,11 @@ variable "node_pools" {
       ]
     }
   }
+}
+
+variable "default_machine_type" {
+  description = "The default machine type for the cluster nodes"
+  default     = "e2-small"
 }
 
 variable "cluster_subnetwork_cidr_range" {
